@@ -25,9 +25,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/papractice.css') }}">
+    <script type="module" src="{{ url_for('static', filename='js/pa_1.js') }}" defer></script>
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+
 </head>
 
 <body>
@@ -53,19 +56,28 @@
             </p>
         </div>
         <div class="card">
-            <a href="{{'/entry_level_1'}}">Entry 1</a>
-            <a href="{{'/entry_level_2'}}">Entry 2</a>
-            <a href="{{'/entry_level_3'}}">Entry 3</a>
-            <a href="{{'/pa_1'}}">PA 1</a>
-        </div>
-        <div class="card">
-            <ul>
-                {% for show in shows %}
-                    <li>
-                        <a href="{{ '/tv-show/' + (show['id'] | string) }}">{{ show['title'] }}</a>
-                    </li>
+            <form method="post">
+                <label for="genre">Enter genre: </label>
+                <input type="text" required id="genre" name="genre">
+                <button type="submit">Search</button>
+            </form>
+
+            {% if data != None %}
+                {% for item in data %}
+                    <ol id="{{ item['title'] }}">
+                        <li>Title: {{ item['title'] }}</li>
+                        <li>Starting date: {{ item['year'] }}</li>
+                        <li> Rating:
+                            {% for i in range(item['rating']) %}
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            {% endfor %}
+                            {% for i in range(10 - item['rating']) %}
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                            {% endfor %}
+                        </li>
+                    </ol>
                 {% endfor %}
-            </ul>
+            {% endif %}
         </div>
     </section>
     <footer>

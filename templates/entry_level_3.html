@@ -25,9 +25,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/papractice.css') }}">
+    <script type="module" src="{{ url_for('static', filename='js/entry_level_2.js') }}" defer></script>
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+
 </head>
 
 <body>
@@ -53,19 +56,31 @@
             </p>
         </div>
         <div class="card">
-            <a href="{{'/entry_level_1'}}">Entry 1</a>
-            <a href="{{'/entry_level_2'}}">Entry 2</a>
-            <a href="{{'/entry_level_3'}}">Entry 3</a>
-            <a href="{{'/pa_1'}}">PA 1</a>
-        </div>
-        <div class="card">
-            <ul>
-                {% for show in shows %}
-                    <li>
-                        <a href="{{ '/tv-show/' + (show['id'] | string) }}">{{ show['title'] }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <form method='POST'>
+                <label for="season">Enter season number:</label>
+                    <input type="text" required id="season" name="season"><br>
+                <label for="episode">Enter episode number:</label>
+                    <input type="text" required id="episode" name="episode"><br>
+                <button type="submit">Search</button>
+            </form>
+            {% if data != None %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Genre</th>
+                            <th>Shows</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for items in data %}
+                            <tr>
+                                <td>{{ items['genre'] }}</td>
+                                <td>{{ items['shows'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
         </div>
     </section>
     <footer>
