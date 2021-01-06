@@ -25,9 +25,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/form.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/grid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/utils.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/papractice.css') }}">
+    <script type="module" src="{{ url_for('static', filename='js/pa_9.js') }}" defer></script>
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+
 </head>
 
 <body>
@@ -53,22 +56,15 @@
             </p>
         </div>
         <div class="card">
-            <a href="{{'/entry_level_1'}}">Entry 1</a>
-            <a href="{{'/entry_level_2'}}">Entry 2</a>
-            <a href="{{'/entry_level_3'}}">Entry 3</a>
-            <a href="{{'/pa_1'}}">PA 1</a>
-            <a href="{{'/pa_2'}}">PA 2</a>
-            <a href="{{'/pa_3'}}">PA 3</a>
-            <a href="{{'/pa_9'}}">PA 9</a>
-            <a href="{{'/pa_11'}}">PA 11</a>
+            <form>
+                <label for="search"></label>
+                <input type="text" required id="search" name="search">
+                <button id="search-button">Search</button>
+            </form>
         </div>
-        <div class="card">
-            <ul>
-                {% for show in shows %}
-                    <li>
-                        <a href="{{ '/tv-show/' + (show['id'] | string) }}">{{ show['title'] }}</a>
-                    </li>
-                {% endfor %}
+        <div class="card" >
+            <ul id="data-holder">
+
             </ul>
         </div>
     </section>

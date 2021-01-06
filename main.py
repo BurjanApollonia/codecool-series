@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify
 from data import queries
 import math
 from dotenv import load_dotenv
@@ -60,6 +60,57 @@ def pa_1():
         data = queries.pa_1(genre)
         return render_template('pa_1.html', data=data)
     return render_template('pa_1.html', data=None)
+
+
+@app.route('/pa_2')
+def pa_2():
+    data = queries.pa_2()
+    return render_template('pa_2.html', data=data)
+
+
+@app.route('/pa_3')
+def pa_3():
+    datas = {}
+    data = queries.pa_3()
+    for item in data:
+        names = []
+        title = item['title']
+        data_list = queries.pa_3_2(item['title'])
+        for i in data_list:
+            names.append(i['name'])
+        datas[title] = names
+    return render_template('pa_3.html', data=data, datas=datas)
+
+
+@app.route('/pa_9')
+def pa_9():
+    return render_template('pa_9.html')
+
+
+@app.route('/pa_9_2', methods=['GET'])
+def pa_9_2():
+    search = request.args.get('input-text')
+    words = search.split(' ')
+    data = []
+    for word in words:
+        result = queries.pa_9('%' + word + '%')
+        for i, row in enumerate(result):
+            data.append(result[i])
+    print(data)
+    return jsonify(data)
+
+
+@app.route('/pa_11')
+def pa_11():
+    data = queries.pa_11()
+    return render_template('pa_11.html', data=data)
+
+
+@app.route('/pa_11_2', methods=['GET'])
+def pa_11_2():
+    ids = request.args.get('input-text')
+    result = queries.pa_11_2(ids)
+    return jsonify(result)
 
 
 def main():

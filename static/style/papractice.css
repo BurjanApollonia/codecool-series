@@ -5,3 +5,18 @@
 .entry-blue {
     background: lightblue;
 }
+
+.pa-card {
+    border: thin solid dimgray;
+    padding: 0 20px 20px 20px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.highlight {
+    background: mediumpurple;
+}
+
+.double-table {
+    display: flex;
+}
