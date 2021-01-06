@@ -89,15 +89,12 @@ def pa_9():
 
 @app.route('/pa_9_2', methods=['GET'])
 def pa_9_2():
+    result = []
     search = request.args.get('input-text')
     words = search.split(' ')
-    data = []
     for word in words:
         result = queries.pa_9('%' + word + '%')
-        for i, row in enumerate(result):
-            data.append(result[i])
-    print(data)
-    return jsonify(data)
+    return jsonify(result)
 
 
 @app.route('/pa_11')

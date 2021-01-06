@@ -15,7 +15,8 @@ async function display() {
     let inputField = document.getElementById('results');
     for (let row of results) {
         inputField.insertAdjacentHTML('beforeend',
-            '<td>' + row['title'] + '</td>' + '<td>' + row['season_number'] + '</td>' + '<td>' + row['episode_number'] + '</td>');
+            '<tr>' + '<td>' + row['title'] + '</td>' + '<td>' + row['season_number'] + '</td>' + '<td>' +
+            row['episode_number'] + '</td>' + '</tr>');
     }
 }
 
