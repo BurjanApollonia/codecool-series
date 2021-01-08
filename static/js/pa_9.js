@@ -9,7 +9,8 @@ async function api_request(inputText) {
     return await response.json();
 }
 
-async function display() {
+async function display(event) {
+    event.preventDefault()
     let inputText = document.getElementById('search').value;
     let results = await api_request(inputText);
     let inputField = document.getElementById('data-holder');
